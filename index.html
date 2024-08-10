@@ -3,35 +3,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Encriptador</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="main.css">
+    
 </head>
 <body>
-    <header>
-
+    <header class="contenedor__logo">
+        <img src="imagenes/Logo.png" alt="logo" class="logo">
     </header>
-    <main>
-        <section>
-            <textarea></textarea>
-            <div>
-                <span>Sólo letras minúsculas y sin caracteres especiales</span>
+    <main class="contenedor__principal">
+        <section class="contenedor__texto">
+            <textarea class="contenido__texto" placeholder="Ingrese el texto aquí"></textarea>
+            <div class="contenedor__mensaje__validacion">
+                <img src="imagenes/bi_exclamation-circle-fill.png" alt="signo-exclamacion">
+                <span class="contenido__mensaje__validacion">Sólo letras minúsculas y sin caracteres especiales</span>
             </div>
-            <div>
-                <button type="button">Encriptar</button>
-                <button type="button">Desencriptar</button>
+            <div class="contenedor__botones">
+                <button type="button" class="boton__encriptar">Encriptar</button>
+                <button type="button" class="boton__desencriptar">Desencriptar</button>
             </div>
         </section>
-        <section>
-            <div>
-                <img src="imagenes/Muñeco.png" alt="imagen-buscando">
-                <h2>Ningún mensaje fue encontrado</h2>
-                <p>Ingresa el texto que deseas encriptar o desencriptar.</p>
+        <section class="contenedor__presentacion__texto">
+            <div class="contenido__presentacion__texto">
+                <img src="imagenes/Muñeco.png" alt="imagen-buscando" class="imagen__buscando">
+                <h2 class="mensaje__no__encontrado">Ningún mensaje fue encontrado</h2>
+                <p class="presentacion__texto">Ingresa el texto que deseas encriptar o desencriptar.</p>
             </div>
             <div class="contenedor__boton__copiar">
-                <button type="button">Copiar</button>
+                <button type="button" class="boton__copiar">Copiar</button>
             </div>
         </section>
     </main>
-    <footer>
-        Desarrolado por Alejandra Tolaba 2024.
+    <footer class="footer">
+        Desarrollado por Alejandra Tolaba 2024.
     </footer> 
 </body>
 </html>
