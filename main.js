@@ -62,12 +62,15 @@ function encriptar (texto){
     return textoEncriptado;
 }
 
-inputTexto.addEventListener("keypress", (event) => {
+inputTexto.addEventListener("input", (event) => {
+    let texto = inputTexto.value;
+    console.log(texto);
     const regex = new RegExp("^[a-z ]+$");
-    const key = String.fromCharCode(!event.keyCode ? event.which : event.keyCode);
+    const key = !event.data ? event.which : event.data;
     console.log(key);
     if (!regex.test(key)) {
         event.preventDefault();
+        inputTexto.value = texto.substr(0,texto.length-1);
         agregarClase(contenedorMensajeValidacion,'alert-danger');
         icono.style.animation = "1.5s ease 0s infinite beat";
         contenedorMensajeValidacion.scrollIntoView({ block: "end", behavior: "smooth" });
