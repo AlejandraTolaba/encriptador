@@ -70,6 +70,7 @@ inputTexto.addEventListener("keypress", (event) => {
         event.preventDefault();
         agregarClase(contenedorMensajeValidacion,'alert-danger');
         icono.style.animation = "1.5s ease 0s infinite beat";
+        contenedorMensajeValidacion.scrollIntoView({ block: "end", behavior: "smooth" });
         return false;
     }
     else{
