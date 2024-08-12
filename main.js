@@ -64,7 +64,7 @@ function encriptar (texto){
 
 inputTexto.addEventListener("keypress", (event) => {
     const regex = new RegExp("^[a-z ]+$");
-    const key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    const key = String.fromCharCode(!event.keyCode ? event.which : event.keyCode);
     console.log(key);
     if (!regex.test(key)) {
         event.preventDefault();
