@@ -88,6 +88,7 @@ botonEncriptar.addEventListener("click", () => {
         const textoEncriptado = encriptar(inputTexto.value);
         mensaje.textContent = textoEncriptado;
         limpiarInputTexto();
+        contenedorPresentacionTexto.scrollIntoView({ block: "end", behavior: "smooth" });
     }
     else{
         inicilizarContenidoPresentacionTexto();
@@ -113,6 +114,7 @@ botonDesencriptar.addEventListener("click", () => {
         const textoDesencriptado = desencriptar(inputTexto.value);  
         mensaje.textContent = textoDesencriptado; 
         limpiarInputTexto();
+        contenedorPresentacionTexto.scrollIntoView({ block: "end", behavior: "smooth" });
     }
     else{
         inicilizarContenidoPresentacionTexto();
