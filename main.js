@@ -12,6 +12,8 @@ const inputTexto = document.querySelector("textarea");
 const mensaje = document.getElementById("mensaje");
 const botonEncriptar = document.querySelector(".boton__encriptar");
 const botonDesencriptar = document.querySelector(".boton__desencriptar");
+const contenedorMensajeValidacion = document.querySelector(".contenedor__mensaje__validacion");
+const icono = document.querySelector(".material-icons");
 const imagenBuscando = document.querySelector(".imagen__buscando");
 const mensajeNoEncontrado = document.querySelector(".mensaje__no__encontrado");
 const botonCopiar = document.querySelector(".boton__copiar");
@@ -22,13 +24,9 @@ const mensajeIngresarTexto = mensaje.textContent;
     Declaración de Funciones
 **********************************/
 
-function agregarClase (elemento, clase){
-    elemento.classList.add(clase);
-}
-
-function removerClase (elemento, clase){
-    elemento.classList.remove(clase);
-}
+const agregarClase = (elemento, clase) => elemento.classList.add(clase);
+const removerClase = (elemento, clase) => elemento.classList.remove(clase);
+const limpiarInputTexto = () => inputTexto.value = "";
 
 const modificarEstilosIniciales = () => {
     agregarClase(imagenBuscando,'ocultar');
@@ -48,7 +46,7 @@ const agregarEstilosIniciales = () => {
     removerClase(contenedorPresentacionTexto,'justify-content-between');
 }
 
-function inicilizarPresentacionTexto () {
+const inicilizarContenidoPresentacionTexto =  () => {
     agregarEstilosIniciales();
     mensaje.textContent = mensajeIngresarTexto;
 }
@@ -61,17 +59,34 @@ function encriptar (texto){
     textoEncriptado = textoEncriptado.replace(er_claves, function(key){
         return llaves[key];
     });
-    mensaje.textContent = textoEncriptado;
-    // return mensaje.textContent;
+    return textoEncriptado;
 }
+
+inputTexto.addEventListener("keypress", (event) => {
+    const regex = new RegExp("^[a-z ]+$");
+    const key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    console.log(key);
+    if (!regex.test(key)) {
+        event.preventDefault();
+        agregarClase(contenedorMensajeValidacion,'alert-danger');
+        icono.style.animation = "1.5s ease 0s infinite beat";
+        return false;
+    }
+    else{
+        icono.style.animation = "none";
+        removerClase(contenedorMensajeValidacion,'alert-danger');
+    }
+});
 
 botonEncriptar.addEventListener("click", () => {
     if (inputTexto.value) {
         modificarEstilosIniciales();
-        encriptar(inputTexto.value);
+        const textoEncriptado = encriptar(inputTexto.value);
+        mensaje.textContent = textoEncriptado;
+        limpiarInputTexto();
     }
     else{
-        inicilizarPresentacionTexto();
+        inicilizarContenidoPresentacionTexto();
     }
 });
 
@@ -85,17 +100,18 @@ function desencriptar (texto){
         const llavesObj = Object.fromEntries(llavesFiltradas);
         return Object.keys(llavesObj);
     });
-    mensaje.textContent = textoDesencriptado;
-    // return textoDesencriptado;
+    return textoDesencriptado;
 }
 
 botonDesencriptar.addEventListener("click", () => {
     if (inputTexto.value) {
         modificarEstilosIniciales();
-        desencriptar(inputTexto.value);   
+        const textoDesencriptado = desencriptar(inputTexto.value);  
+        mensaje.textContent = textoDesencriptado; 
+        limpiarInputTexto();
     }
     else{
-        inicilizarPresentacionTexto();
+        inicilizarContenidoPresentacionTexto();
     }
 });
 

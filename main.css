@@ -65,14 +65,14 @@ button{
 
 .contenedor__mensaje__validacion{
     display: flex;
+    align-items: center;
     margin-top: 2rem;;
-    font-size: .8rem;
+    font-size: .9rem;
     color: var(--color-terciario);
 }
 
 .contenedor__mensaje__validacion .contenido__mensaje__validacion{
     padding-left: 5px;
-    vertical-align: middle;
 }
 
 .contenedor__botones{
@@ -89,10 +89,21 @@ button{
     border: none;
 }
 
+.contenedor__botones .boton__encriptar:hover {
+    background-color: #144d92;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+}
+
 .contenedor__botones .boton__desencriptar{
     background-color: white;
     border: 1px solid var(--color-secundario);
     color: var(--color-secundario);
+}
+
+.contenedor__botones .boton__desencriptar:hover,
+.contenedor__boton__copiar .boton__copiar:hover {
+    background-color: #f8fafe;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
 }
 
 .contenedor__presentacion__texto{
@@ -154,6 +165,25 @@ button{
 .justify-content-between{
     justify-content: space-between !important;
 }
+
+.alert-danger{
+    background-color: #a94442;
+    position: absolute;
+    top: 9%;
+    right: 40%;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+/* Animación */
+
+@keyframes beat {
+    0%, 50%, 100% { transform: scale(1, 1); }
+    30%, 80% { transform: scale(0.7, 0.7); }
+}
+
+  
 
 @media screen and (min-width: 768px) {
     body{
