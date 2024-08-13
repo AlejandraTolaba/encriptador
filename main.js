@@ -17,6 +17,7 @@ const icono = document.querySelector(".material-icons");
 const imagenBuscando = document.querySelector(".imagen__buscando");
 const mensajeNoEncontrado = document.querySelector(".mensaje__no__encontrado");
 const botonCopiar = document.querySelector(".boton__copiar");
+const contenedorTextoCopiado = document.querySelector(".contenedor__texto__copiado");
 const contenedorPresentacionTexto = document.querySelector(".contenedor__presentacion__texto");
 const mensajeIngresarTexto = mensaje.textContent;
 
@@ -52,6 +53,7 @@ const inicilizarContenidoPresentacionTexto =  () => {
 }
 
 function encriptar (texto){
+    texto = texto.toLowerCase();
     let textoEncriptado = texto;
     let claves = Object.keys(llaves);
     claves = claves.join('|')
@@ -64,12 +66,9 @@ function encriptar (texto){
 
 inputTexto.addEventListener("input", (event) => {
     let texto = inputTexto.value;
-    console.log(texto);
+    // console.log(texto);
     const regex = new RegExp("^[a-z ]+$");
-    const key = !event.data ? event.which : event.data;
-    console.log(key);
-    if (!regex.test(key)) {
-        event.preventDefault();
+    if (!regex.test(event.data)) {
         inputTexto.value = texto.substr(0,texto.length-1);
         agregarClase(contenedorMensajeValidacion,'alert-danger');
         icono.style.animation = "1.5s ease 0s infinite beat";
@@ -96,6 +95,7 @@ botonEncriptar.addEventListener("click", () => {
 });
 
 function desencriptar (texto){
+    texto = texto.toLowerCase();
     let textoDesencriptado = texto;
     let valores = Object.values(llaves);
     valores = valores.join('|')
@@ -121,6 +121,17 @@ botonDesencriptar.addEventListener("click", () => {
     }
 });
 
-botonCopiar.addEventListener("click", () => {
-    navigator.clipboard.writeText(mensaje.textContent)
-});
+const copiarContenido = async () => {
+    try {
+      await navigator.clipboard.writeText(mensaje.textContent);
+    //   console.log('Contenido copiado al clipboard');
+      removerClase(contenedorTextoCopiado,'ocultar');
+      let interval = setInterval( () => {
+        agregarClase(contenedorTextoCopiado,'ocultar');
+     }, 2000 );
+    } catch (err) {
+      console.error('Falló al copiar: ', err);
+    }
+}
+
+botonCopiar.addEventListener("click", copiarContenido);
